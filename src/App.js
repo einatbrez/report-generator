@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Report from './components/Report'
+import Modal from './components/Modal'
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+  
+  const [modal, setOpenModal] = useState(false);
+  const pageHeight = 1200;
+  const reportTitle = 'Report Generator'
+  
+  function openModal(){
+    setOpenModal(true);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app" className="App container">
+      <div className="d-flex align-items-center justify-content-center border-bottom" style={{height: pageHeight + 'px'}}>
+        <h1 className="display-1 text-primary font-weight-bold">{reportTitle}</h1>
+      </div>
+      <Report 
+        pageHeight={pageHeight}
+        openModalCallback = {() => openModal()}/>
+      <Modal
+        openModal = {modal}
+      />
     </div>
   );
 }
